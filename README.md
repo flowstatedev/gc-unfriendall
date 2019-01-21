@@ -1,5 +1,7 @@
 # gc-unfriend
-Delete all your Garmin Connect connections (friends)
+Delete all your Garmin Connect connections (friends).
+
+Requires Python 3.
 
 ```
 usage: gcunfriend.py [-h] [--version] [--username [USERNAME]]
