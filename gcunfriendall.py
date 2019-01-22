@@ -100,6 +100,13 @@ def http_req(url, post=None, headers=None):
 	return response.read()
 
 print('Welcome to the Garmin Connect Unfriender!')
+
+print('')
+print('ALL YOUR GARMIN CONNECT CONNECTIONS (FRIENDS) WILL BE DELETED')
+RESPONSE = input('Type "YES" and press ENTER if you are absolutely sure: ')
+if RESPONSE != 'YES':
+	sys.exit(0)
+
 print('')
 USERNAME=''
 PASSWORD=''
@@ -113,12 +120,6 @@ while not PASSWORD:
 	if not PASSWORD:
 		print("Please enter a password.")
 		print("")
-
-print('')
-print('ALL YOUR GARMIN CONNECT CONNECTIONS (FRIENDS) WILL BE DELETED')
-RESPONSE = input('Type "YES" and press ENTER if you are absolutely sure: ')
-if RESPONSE != 'YES':
-	sys.exit(0)
 
 
 # Maximum number of activities you can request at once.	 Set and enforced by Garmin.
