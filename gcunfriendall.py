@@ -115,7 +115,7 @@ while not PASSWORD:
 		print("")
 
 print('')
-print('ALL YOUR GARMIN CONNECT CONTACTS WILL BE DELETED')
+print('ALL YOUR GARMIN CONNECT CONNECTIONS (FRIENDS) WILL BE DELETED')
 RESPONSE = input('Type "YES" and press ENTER if you are absolutely sure: ')
 if RESPONSE != 'YES':
 	sys.exit(0)
