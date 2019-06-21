@@ -126,38 +126,46 @@ while not PASSWORD:
 LIMIT_MAXIMUM = 1000
 
 WEBHOST = "https://connect.garmin.com"
-REDIRECT = "https://connect.garmin.com/post-auth/login"
-BASE_URL = "http://connect.garmin.com/en-US/signin"
+REDIRECT = "https://connect.garmin.com/modern/"
+BASE_URL = "https://connect.garmin.com/en-US/signin"
 SSO = "https://sso.garmin.com/sso"
 CSS = "https://static.garmincdn.com/com.garmin.connect/ui/css/gauth-custom-v1.2-min.css"
 
 DATA = {
-	'service': REDIRECT,
-	'webhost': WEBHOST,
-	'source': BASE_URL,
-	'redirectAfterAccountLoginUrl': REDIRECT,
-	'redirectAfterAccountCreationUrl': REDIRECT,
-	'gauthHost': SSO,
-	'locale': 'en_US',
-	'id': 'gauth-widget',
-	'cssUrl': CSS,
-	'clientId': 'GarminConnect',
-	'rememberMeShown': 'true',
-	'rememberMeChecked': 'false',
-	'createAccountShown': 'true',
-	'openCreateAccount': 'false',
-	'usernameShown': 'false',
-	'displayNameShown': 'false',
-	'consumeServiceTicket': 'false',
-	'initialFocus': 'true',
-	'embedWidget': 'false',
-	'generateExtraServiceTicket': 'false'
-	}
+    'service': REDIRECT,
+    'webhost': WEBHOST,
+    'source': BASE_URL,
+    'redirectAfterAccountLoginUrl': REDIRECT,
+    'redirectAfterAccountCreationUrl': REDIRECT,
+    'gauthHost': SSO,
+    'locale': 'en_US',
+    'id': 'gauth-widget',
+    'cssUrl': CSS,
+    'clientId': 'GarminConnect',
+    'rememberMeShown': 'true',
+    'rememberMeChecked': 'false',
+    'createAccountShown': 'true',
+    'openCreateAccount': 'false',
+    'usernameShown': 'false',
+    'displayNameShown': 'false',
+    'consumeServiceTicket': 'false',
+    'initialFocus': 'true',
+    'embedWidget': 'false',
+    'generateExtraServiceTicket': 'true',
+    'generateTwoExtraServiceTickets': 'false',
+    'generateNoServiceTicket': 'false',
+    'globalOptInShown': 'true',
+    'globalOptInChecked': 'false',
+    'mobile': 'false',
+    'connectLegalTerms': 'true',
+    'locationPromptShown': 'true',
+    'showPassword': 'true'    
+}
 
 #print(urllib.parse.urlencode(DATA))
 
 # URLs for various services.
-URL_GC_LOGIN = 'https://sso.garmin.com/sso/login?' + urllib.parse.urlencode(DATA)
+URL_GC_LOGIN = 'https://sso.garmin.com/sso/signin?' + urllib.parse.urlencode(DATA)
 URL_GC_POST_AUTH = 'https://connect.garmin.com/modern/activities?'
 URL_GC_SEARCH = 'https://connect.garmin.com/proxy/activity-search-service-1.2/json/activities?'
 URL_GC_LIST = \
@@ -188,16 +196,18 @@ http_req(URL_GC_LOGIN)
 # Now we'll actually login.
 # Fields that are passed in a typical Garmin login.
 POST_DATA = {
-	'username': USERNAME,
-	'password': PASSWORD,
-	'embed': 'true',
-	'lt': 'e1s1',
-	'_eventId': 'submit',
-	'displayNameRequired': 'false'
-	}
+    'username': USERNAME,
+    'password': PASSWORD,
+    'embed': 'false',
+    'rememberme': 'on'
+    }
+    
+headers = {
+    'referer': URL_GC_LOGIN
+}    
 
 #print('Post login data')
-LOGIN_RESPONSE = http_req(URL_GC_LOGIN, urllib.parse.urlencode(POST_DATA)).decode()
+LOGIN_RESPONSE = http_req(URL_GC_LOGIN + '#', urllib.parse.urlencode(POST_DATA), headers).decode()
 #print('Finish login post')
 
 # extract the ticket from the login response
