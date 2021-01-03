@@ -4,8 +4,8 @@ Delete all your Garmin Connect connections (friends).
 Requires Python 3.
 
 ```
-usage: gcunfriendall.py [-h] [--version] [--username [USERNAME]]
-                     [--password [PASSWORD]]
+usage: gcunfriendall.py [-h] [--version]
+                     [--username [USERNAME]] [--password [PASSWORD]]
 
 optional arguments:
   -h, --help            show this help message and exit
